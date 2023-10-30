@@ -8,7 +8,8 @@ import { notify } from '../helper/sweetAlert';
 //! Interface is used to define type of objects
 
 
-const url = "https://64a7a5bddca581464b848170.mockapi.io/todos"
+// const url = "https://64a7a5bddca581464b848170.mockapi.io/todos"
+const url="http://127.0.0.1:8000/list/"
 
 
 const Main = () => {
@@ -44,7 +45,7 @@ const Main = () => {
         console.log(id);
         
       try {
-        await axios.delete(`${url}/${id}`)
+        await axios.delete(`${url}${id}/`)
         notify("Task successfully deleted!", "success")
         getTodos()
       } catch (error) {
@@ -53,8 +54,10 @@ const Main = () => {
       }
     }
     const toggleTodo:ToggleFn =async (item) => {
+      console.log(item.id);
+      
       try {
-        await axios.put(`${url}/${item.id}`, {...item, isDone: !item.isDone});
+        await axios.put(`${url}${item.id}/`, {...item, isDone: !item.isDone});
         notify("Task successfully updated", "success")
         getTodos()
       } catch (error) {
