@@ -4,7 +4,7 @@ import SaveIcon from "@mui/icons-material/Save";
 
 //! to define the props. 
 interface IAddTodo{
-    // addTodo:(text:string) => void;
+    // addTodo:(task:string) => void;
     addTodo:Addfn
 }
 
@@ -12,13 +12,21 @@ interface IAddTodo{
 const AddTodoComp:React.FC<IAddTodo> = ({addTodo}) => {
 
     const [task, setTask] = useState("")
-    //! TypeScript type inference özelligi sayesinde, bir variable'in initial degerine göre otomatik type atamasi yapiyor... her zaman type belirtmek zorunda degiliz..
+    //! with type inference property, a variable can take a value by initial value
 
     const handleClick=()=>{
         addTodo(task)
         setTask("")
         console.log(task);     
     }
+
+    const handlePress=(e:string)=>{
+      if(e === "Enter" && task.trim()){
+        handleClick()  
+        
+      }
+    }
+
 
     return (
     <Container>
@@ -37,13 +45,14 @@ const AddTodoComp:React.FC<IAddTodo> = ({addTodo}) => {
       inputProps={{ maxLength: 40 }}
       value={task}
       onChange={(e)=>setTask(e.target.value)}
+      onKeyDown={(e)=>handlePress(e.key)}
     />
     <Button
       variant="contained"
       endIcon={<SaveIcon />}
       sx={{ minWidth: { xs: "100%", sm: "15%" }, height: "55px", m: 1 }}
       onClick={handleClick}
-      // disabled={true}    //todo input bos oludugunda disable olmasi icin disabled i static olarak ayarliyoruz.
+      // disabled={true}    //! if the input is empty, disable true.
       disabled={!task.trim()}
       >
       Save Todo

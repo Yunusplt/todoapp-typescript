@@ -5,7 +5,7 @@ import TodoListComp from '../components/TodoListComp';
 import axios from 'axios';
 import { notify } from '../helper/sweetAlert';
 
-//! objelerin type i belirlenirken interface kullanilir. 
+//! Interface is used to define type of objects
 
 
 const url = "https://64a7a5bddca581464b848170.mockapi.io/todos"
@@ -25,7 +25,7 @@ const Main = () => {
         }
     }
 
-    // type Addfn = (text:string) => void;
+      // type Addfn = (text:string) => void;
     const addTodo:Addfn = async (task) => {
         const newTodo = {
             task: task,
@@ -39,42 +39,29 @@ const Main = () => {
             notify("Task can't successfully created!", "error")
         }
     }
-    //! II. way
-    // const AddTodo = async (task:string) => {
-    //     const newTodo = {
-    //         task: task,
-    //         isDone: false,
-    //     } 
-    //     try {
-    //         await axios.post(url, newTodo)
-    //         getTodos()
-    //     } catch (error) {
-            
-    //     }
-    // }
 
-const deleteTodo:DeleteFn =async (id) => {
+    const deleteTodo:DeleteFn =async (id) => {
         console.log(id);
         
-  try {
-    await axios.delete(`${url}/${id}`)
-    notify("Task successfully deleted!", "success")
-    getTodos()
-  } catch (error) {
-    notify("Task can not deleted!", "error")
-    console.log(error);
-  }
-}
-const toggleTodo:ToggleFn =async (item) => {
-  try {
-    await axios.put(`${url}/${item.id}`, {...item, isDone: !item.isDone});
-    notify("Task successfully updated", "success")
-    getTodos()
-  } catch (error) {
-    notify("Task can't successfully updated", "error")
-    console.log(error);
+      try {
+        await axios.delete(`${url}/${id}`)
+        notify("Task successfully deleted!", "success")
+        getTodos()
+      } catch (error) {
+        notify("Task can not deleted!", "error")
+        console.log(error);
+      }
+    }
+    const toggleTodo:ToggleFn =async (item) => {
+      try {
+        await axios.put(`${url}/${item.id}`, {...item, isDone: !item.isDone});
+        notify("Task successfully updated", "success")
+        getTodos()
+      } catch (error) {
+        notify("Task can't successfully updated", "error")
+        console.log(error);
     
-  }
+    }
 }
 
 

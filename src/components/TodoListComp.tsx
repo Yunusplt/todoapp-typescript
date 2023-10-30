@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Grid from "@mui/material/Grid";
-import { Typography, BottomNavigation, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import TodoListItemComp from './TodoListItemComp';
 
 interface ITodos {
@@ -51,7 +51,7 @@ const TodoListComp:React.FC<ITodos> = ({todos, deleteTodo, toggleTodo}) => {
             No Progress todos!{" "}
           </Typography>
         )}
-        <Box textAlign="center" p={1} position="absolute" bottom={0} left={0} right={0}>
+        <Box textAlign="center" position="absolute" bottom={0} left={0} right={0}>
           <Typography><sub>*Click double, if the task is completed</sub></Typography>
         </Box>
       </Grid>
