@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import { Typography, BottomNavigation, Box } from "@mui/material";
 import TodoListItemComp from './TodoListItemComp';
 
 interface ITodos {
@@ -27,7 +27,8 @@ const TodoListComp:React.FC<ITodos> = ({todos, deleteTodo, toggleTodo}) => {
         justifyContent: "center",
         alignItems: "center",
         gap: "0.5rem",
-      }}>
+      }}
+      >
       <Grid
         item
         xs={12}
@@ -37,17 +38,22 @@ const TodoListComp:React.FC<ITodos> = ({todos, deleteTodo, toggleTodo}) => {
           borderRadius: "0.5rem",
           p: "1rem",
           minHeight: "350px",
-        }}>
+        }}
+        position="relative"
+        >
         <Typography variant="h4" align="center" color="secondary">
           InProgress Todos
         </Typography>
         {progressTasks.length ? (
-          progressTasks.map(item => <TodoListItemComp key={item.id} item={item} />)
+          progressTasks.map(item => <TodoListItemComp key={item.id} item={item} deleteTodo = {deleteTodo} toggleTodo={toggleTodo} />)
         ) : (
           <Typography color="error" mt={3}>
             No Progress todos!{" "}
           </Typography>
         )}
+        <Box textAlign="center" p={1} position="absolute" bottom={0} left={0} right={0}>
+          <Typography><sub>*Click double, if the task is completed</sub></Typography>
+        </Box>
       </Grid>
       <Grid
         item
@@ -63,7 +69,7 @@ const TodoListComp:React.FC<ITodos> = ({todos, deleteTodo, toggleTodo}) => {
           Completed Todos
         </Typography>
         {completedTasks.length ? (
-          completedTasks.map(item => <TodoListItemComp key={item.id} item={item} />)
+          completedTasks.map(item => <TodoListItemComp key={item.id} item={item} deleteTodo = {deleteTodo} toggleTodo={toggleTodo} />)
         ) : (
           <Typography color="error" mt={3}>
             No Completed todos!{" "}

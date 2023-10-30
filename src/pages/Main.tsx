@@ -26,19 +26,20 @@ const Main = () => {
     }
 
     // type Addfn = (text:string) => void;
-    const addTodo:Addfn = async (task:string) => {
+    const addTodo:Addfn = async (task) => {
         const newTodo = {
             task: task,
             isDone: false,
         } 
         try {
             await axios.post(url, newTodo)
+            notify("Task successfully created!", "success")
             getTodos()
         } catch (error) {
-            
+            notify("Task can't successfully created!", "error")
         }
     }
-    //! II. yol
+    //! II. way
     // const AddTodo = async (task:string) => {
     //     const newTodo = {
     //         task: task,
@@ -52,22 +53,25 @@ const Main = () => {
     //     }
     // }
 
-    const deleteTodo:DeleteFn =async (id) => {
+const deleteTodo:DeleteFn =async (id) => {
+        console.log(id);
+        
   try {
     await axios.delete(`${url}/${id}`)
-    notify("Todo successfully deleted!", "success")
+    notify("Task successfully deleted!", "success")
     getTodos()
   } catch (error) {
-    notify("Todo can not deleted!", "error")
+    notify("Task can not deleted!", "error")
     console.log(error);
-    
   }
 }
-const toggleTodo:ToggleFn =async item => {
+const toggleTodo:ToggleFn =async (item) => {
   try {
-    await axios.put(`${url}/${item.id}`, {...item, isDone: !item.isDone})
+    await axios.put(`${url}/${item.id}`, {...item, isDone: !item.isDone});
+    notify("Task successfully updated", "success")
     getTodos()
   } catch (error) {
+    notify("Task can't successfully updated", "error")
     console.log(error);
     
   }
