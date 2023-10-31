@@ -9,7 +9,8 @@ import { notify } from '../helper/sweetAlert';
 
 
 // const url = "https://64a7a5bddca581464b848170.mockapi.io/todos"
-const url="http://127.0.0.1:8000/list/"
+// const url="http://127.0.0.1:8000/list/"
+const url="https://ynsplt.pythonanywhere.com/list/"
 
 
 const Main = () => {
